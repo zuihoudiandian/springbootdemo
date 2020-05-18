@@ -37,7 +37,6 @@ public class Questionservice extends ServiceImpl<QuestionMapper, Question> {
     @Autowired
     private UserInfoMapper userInfoMapper;
 
-    @Cacheable(value = "allQuestions",key = "#p1")
     public PaginationDTO Allselect(String search,Integer page, Integer size) {
         if (StringUtils.isNotBlank(search)) {
             String[] tags = StringUtils.split(search, " ");
@@ -166,7 +165,7 @@ public class Questionservice extends ServiceImpl<QuestionMapper, Question> {
         return questionDTOS;
     }
 
-
+    @Cacheable(value="thisredis")
     public List<QuestionDto>  selectquestionByView() {
         List<Question> questions = questionMapper.selectquestionByView();
         List<QuestionDto> hotquestionDto = new ArrayList<>();

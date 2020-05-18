@@ -106,7 +106,7 @@ public class publishController {
                 question.setGmtModified(date);
                 question.setTag(tag);
                 question.setId(id.longValue());
-           if(publishService.updateQuestion(question)==null){
+           if(!publishService.updateQuestion(question)){
                throw  new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
            }
         }

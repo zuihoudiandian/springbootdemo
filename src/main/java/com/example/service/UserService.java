@@ -27,21 +27,24 @@ public class UserService extends ServiceImpl<UserMapper,User> {
 
     public void createOrUpdate(User user, UserInfo userInfo) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-       wrapper.eq("token",user.getToken());
+       wrapper.eq("ACCOUNT_ID",user.getAccountId());
         User users = userMapper.selectOne(wrapper);
         if (users == null) {
             // 插入
             user.setGmtCreate(TimeUtils.formatNow("yyyy-MM-dd HH:mm:ss"));
             user.setGmtModified(user.getGmtCreate());
+            userInfo.setGmtCreate(TimeUtils.formatNow("yyyy-MM-dd HH:mm:ss"));
             userInfoMapper.insert(userInfo);
             userMapper.insert(user);
         } else {
             //更新
             user.setGmtModified(TimeUtils.formatNow("yyyy-MM-dd HH:mm:ss"));
             UpdateWrapper<User> userUpdate = new UpdateWrapper<>();
+            userUpdate.eq("ACCOUNT_ID",user.getAccountId());
             userMapper.update(user, userUpdate);
             userInfo.setGmtModified(TimeUtils.formatNow("yyyy-MM-dd HH:mm:ss"));
             UpdateWrapper<UserInfo> userInfoUpdate = new UpdateWrapper<>();
+            userInfoUpdate.eq("ACCOUNT_ID",userInfo.getAccountId());
             int update= userInfoMapper.update(userInfo,userInfoUpdate);
         }
     }

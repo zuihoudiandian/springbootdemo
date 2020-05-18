@@ -41,8 +41,11 @@ public class SessionInterceptor implements HandlerInterceptor {
                     wrapper.eq("token",token);
                     User user = userMapper.selectOne(wrapper);
                     QueryWrapper<UserInfo> userInfoQueryWrapper = new QueryWrapper<>();
-                    userInfoQueryWrapper.eq("ACCOUNT_ID",user.getAccountId());
-                    UserInfo userInfo = userInfoMapper.selectOne(userInfoQueryWrapper);
+                    UserInfo userInfo=null;
+                    if (user!=null){
+                        userInfoQueryWrapper.eq("ACCOUNT_ID",user.getAccountId());
+                         userInfo = userInfoMapper.selectList(userInfoQueryWrapper).get(0);
+                    }
                     if (userInfo != null){
                         request.getSession().setAttribute("user",user);
                         request.getSession().setAttribute("userInfo",userInfo);

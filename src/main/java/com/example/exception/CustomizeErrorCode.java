@@ -18,7 +18,8 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     INVALID_INPUT(2011, "非法输入"),
     INVALID_OPERATION(2012, "兄弟，是不是走错房间了？"),
     UPDATE_ERROR(2013,"更新个人资料失败"),
-    FILEUPLOAD_REEOR(2014,"头像上传失败")
+    FILEUPLOAD_REEOR(2014,"头像上传失败"),
+    LOGIN_REEOR(2014,"  您已经在另外一个浏览器登陆，如不是正常登陆建议修改密码")
     ;
 
     @Override

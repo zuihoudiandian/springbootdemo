@@ -3,7 +3,6 @@ $(function () {
         idField: "id",
         pagination: true,
         showRefresh: true,
-        search: true,
         striped: true,
         cache: false,
         sidePagination:'server',
@@ -98,13 +97,16 @@ function questionByuser(id) {
         }, {
             field: 'title',
             title: '标题',
+            class: 'table-title-max-width'
         },  {
             field: 'description',
-            title: '内容'
+            title: '内容',
+            class: 'table-content-max-width'
         },
             {
                 field: 'tag',
-                title: '标签'
+                title: '标签',
+                class: 'table-label-max-width'
             },
             {
                 field: 'viewCount',

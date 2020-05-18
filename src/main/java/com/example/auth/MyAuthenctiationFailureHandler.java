@@ -8,7 +8,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -21,10 +20,14 @@ public class MyAuthenctiationFailureHandler extends SimpleUrlAuthenticationFailu
     private ObjectMapper objectMapper;
 
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)  {
         logger.info("登陆失败");
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper.writeValueAsString( ResultDTO.errorOf(404,"账号或者密码错误!!")));
+        try {
+            response.getWriter().write(objectMapper.writeValueAsString( ResultDTO.errorOf(404,"账号或者密码错误!!")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
